@@ -6,9 +6,13 @@ namespace MontyHall
 {
     public class Contestant
     {
+        private bool _switching;
+
+        
         public Door ChosenDoor { get; set; }
-        public Contestant()
+        public Contestant( bool switching = false)
         {
+            _switching = switching;
         }
 
         public void ChooseDoor(List<Door> doors)
@@ -18,7 +22,12 @@ namespace MontyHall
 
         public void DecideNextMove(List<Door> doors)
         {
-
+            
+            if(_switching)
+            {
+                ChosenDoor = doors.Last();
+            }
+            
         }
     }
 }

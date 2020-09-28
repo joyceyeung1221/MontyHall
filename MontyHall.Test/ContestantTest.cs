@@ -42,7 +42,7 @@ namespace MontyHall.Test
         [Fact]
         public void ShouldHaveDifferentDoor_WhenPlayerChooseToSwitch()
         {
-            var contestant = new Contestant();
+            var contestant = new Contestant(switching: true);
             contestant.ChooseDoor(doors);
             var firstDoor = contestant.ChosenDoor;
             contestant.DecideNextMove(doors);
