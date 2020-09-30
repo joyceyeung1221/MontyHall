@@ -17,8 +17,8 @@ namespace MontyHall.Test
         public void ShouldChooseADoorThatDoesNotHaveAPrize()
         {
             var host = new Host();
-            var door = host.ChooseDoor(doors);
-
+            host.ChooseDoor(doors);
+            var door = host.chosenDoor;
             
             Assert.False(door.HasPrize);
         }

@@ -6,15 +6,15 @@ namespace MontyHall
     public class Host
     {
         public Door chosenDoor;
-       public Door ChooseDoor(List<Door> doors)
+        public void ChooseDoor(List<Door> doors)
         {
             foreach(Door d in doors)
             {
-                if(!d.HasPrize)//TODO: Would be nice to have Monty pick a 'random' losing door
+                if(!d.HasPrize) //TODO: Would be nice to have Monty pick a 'random' losing door
                 {
                     //pick a door
                     chosenDoor = d;
-                    return chosenDoor;
+                    return;
                 }
             }
         }
