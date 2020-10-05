@@ -7,11 +7,12 @@ namespace MontyHall.Test
 {
     public class GameTests
     {
+
         [Fact]
         public void ShouldRepresentDoorsAsAList()
         {
-            var game = new Game();
-            game.Setup(3);
+            var rand = new Randomiser();
+            var game = new Game(rand, 3);
             Assert.IsType<List<Door>>(game.AvailableDoors);
         }
 
@@ -19,11 +20,10 @@ namespace MontyHall.Test
         public void ShouldSetPrizeForOneDoor()
         {
             // TODO: Continue off here
-            var mockRandomiser = new Mock<IRandom>();
-            mockRandomiser.Setup(x => x.AssignPrize()).Returns();
-            var game = new Game(mockRandomiser);
-            
-            game.Setup(3);
+
+            var mockRandomiser = new Mock<IRandom>(); 
+            mockRandomiser.Setup(x => x.GenerateRandomNumber(3)).Returns(0);
+            var game = new Game(mockRandomiser.Object, 3);
             Assert.True(game.AvailableDoors[0].HasPrize);
         }
     }

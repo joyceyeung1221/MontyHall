@@ -1,24 +1,42 @@
+using System;
 using System.Collections.Generic;
 
 namespace MontyHall
 {
     public class Game
     {
-        
-        public Game()
+        public List<Door> AvailableDoors { get; private set;}
+        public Game(IRandom randomiser, int num)
         {
-    
+            AvailableDoors = DoorSetup(randomiser, num);
         }
 
-        public List<Door> AvailableDoors { get; private set;} = new List<Door>();
-        public void Setup(int doorQuantity)
+
+        private List<Door> DoorSetup(IRandom random, int doorQuantity)
         {
-            for(int i = 0; i < doorQuantity; i++)
+            var doors = CreateDoors(doorQuantity);
+            AssignDoorAPrize(random, doors);
+            return doors;
+        }
+
+        private List<Door> CreateDoors(int doorQuantity)
+        {
+            List<Door> doors = new List<Door>();
+            for (int i = 0; i < doorQuantity; i++)
             {
-                AvailableDoors.Add(new Door());
+                doors.Add(new Door());
             }
+            return doors;
         }
 
-        
+        private List<Door> AssignDoorAPrize(IRandom random, List<Door> doors)
+        {
+
+            var door = doors[random.GenerateRandomNumber(doors.Count)];
+            door.HasPrize = true;
+            return doors;
+
+        }
+
     }
 }
