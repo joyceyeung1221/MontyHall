@@ -4,20 +4,21 @@ using System.Linq;
 
 namespace MontyHall
 {
-    public class Contestant
+    public class Player
     {
         private bool _switching;
 
         
         public Door ChosenDoor { get; set; }
-        public Contestant( bool switching = false)
+        public Player( bool switching = false)
         {
             _switching = switching;
         }
 
-        public void ChooseDoor(List<Door> doors)
+        public Door ChooseDoor(List<Door> doors)
         {
             ChosenDoor = doors.First();
+            return ChosenDoor;
         }
 
         public void DecideNextMove(List<Door> doors)

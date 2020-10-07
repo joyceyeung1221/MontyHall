@@ -6,7 +6,7 @@ namespace MontyHall
     public class Host
     {
         public Door chosenDoor;
-        public void ChooseDoor(List<Door> doors)
+        public Door ChooseDoor(List<Door> doors)
         {
             foreach(Door d in doors)
             {
@@ -14,9 +14,10 @@ namespace MontyHall
                 {
                     //pick a door
                     chosenDoor = d;
-                    return;
+                    
                 }
             }
+            return chosenDoor;
         }
     }
 }
