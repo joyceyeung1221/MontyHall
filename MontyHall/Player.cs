@@ -15,9 +15,10 @@ namespace MontyHall
             _switching = switching;
         }
 
-        public Door ChooseDoor(List<Door> doors)
+        public Door ChooseDoor(List<Door> doors, IRandom randomiser)
         {
-            ChosenDoor = doors.First();
+            var randomNumber = randomiser.GenerateRandomNumber(doors.Count);
+            ChosenDoor = doors[randomNumber];
             return ChosenDoor;
         }
 

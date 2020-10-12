@@ -8,20 +8,22 @@ namespace MontyHall
         private Player _player;
         private Host _monty;
         public List<Door> AvailableDoors { get; private set;}
+        private IRandom _randomiser;
 
 
         public Game(IRandom randomiser, int num, Player player)
         {
-            AvailableDoors = DoorSetup(randomiser, num);
+            _randomiser = randomiser;
+            AvailableDoors = DoorSetup(num);
             _player = player;
             _monty = new Host();
         }
 
 
-        private List<Door> DoorSetup(IRandom random, int doorQuantity)
+        private List<Door> DoorSetup( int doorQuantity)
         {
             var doors = CreateDoors(doorQuantity);
-            AssignDoorAPrize(random, doors);
+            AssignDoorAPrize(doors);
             return doors;
         }
 
@@ -35,36 +37,29 @@ namespace MontyHall
             return doors;
         }
 
-        private List<Door> AssignDoorAPrize(IRandom random, List<Door> doors)
+        private List<Door> AssignDoorAPrize(List<Door> doors)
         {
 
-            var door = doors[random.GenerateRandomNumber(doors.Count)];
+            var door = doors[_randomiser.GenerateRandomNumber(doors.Count)];
             door.HasPrize = true;
             return doors;
 
         }
 
-        public bool DidPlayerWin()
+        private bool DidPlayerWin()
         {
             return _player.ChosenDoor.HasPrize;
         }
 
-        public void Run()
+        public bool Run()
         {
-              //game runs
-
-                //playerChooses a door
-                var door = _player.ChooseDoor(AvailableDoors);
-                //game removes door from list
+                var door = _player.ChooseDoor(AvailableDoors, _randomiser);
                 AvailableDoors.Remove(door);
-                //monty Chooses a losing door
                 var hostDoor = _monty.ChooseDoor(AvailableDoors);
-                //game removes door from list
                 AvailableDoors.Remove(hostDoor);
-                //player chooses door - either the same door or swapping door
-                _player.DecideNextMove(AvailableDoors); //TODO: change DecideNextMove to bool
-                //compare if the Door player has, has prize or not
-                //Did player win
+                _player.DecideNextMove(AvailableDoors);
+                return DidPlayerWin();
+                // TODO: Need to start simulation and account for non-switching scenario
         }
 
 

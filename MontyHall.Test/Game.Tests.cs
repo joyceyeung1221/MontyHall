@@ -21,8 +21,6 @@ namespace MontyHall.Test
         [Fact]
         public void ShouldSetPrizeForOneDoor()
         {
-            // TODO: Continue off here
-
             var mockRandomiser = new Mock<IRandom>(); 
             mockRandomiser.Setup(x => x.GenerateRandomNumber(3)).Returns(0);
             var game = new Game(mockRandomiser.Object, numberOfDoors, player);
@@ -33,14 +31,11 @@ namespace MontyHall.Test
         public void ShouldReturnTrueWhenPlayerHasDoorWithPrize()
         {
             var door = new Door();
-            
             var mockRandomiser = new Mock<IRandom>(); 
+            mockRandomiser.Setup(x => x.GenerateRandomNumber(It.IsAny<int>())).Returns(0);
             var game = new Game(mockRandomiser.Object, numberOfDoors, player);
 
-            door.HasPrize = true;
-            player.ChosenDoor = door;
-
-            Assert.True(game.DidPlayerWin());
+            Assert.True(game.Run());
 
         }
 
@@ -50,12 +45,12 @@ namespace MontyHall.Test
             var door = new Door();
             
             var mockRandomiser = new Mock<IRandom>(); 
+            mockRandomiser.SetupSequence(x => x.GenerateRandomNumber(It.IsAny<int>()))
+            .Returns(2)
+            .Returns(0);
             var game = new Game(mockRandomiser.Object, numberOfDoors, player);
-
-            door.HasPrize = false;
-            player.ChosenDoor = door;
-
-            Assert.False(game.DidPlayerWin());
+            
+            Assert.False(game.Run());
 
         }
 
@@ -69,22 +64,5 @@ namespace MontyHall.Test
             Assert.Equal(1, game.AvailableDoors.Count);
         }
 
-
-
-        //test that the game removes the players selected door from list of doors
-            //stub in a list of doors
-            //run the 'removeDoor method
-            //check door list count
-
-
-            //game runs
-                //set up
-                //playerChooses a door
-                //game removes door from list
-                //monty Chooses a losing door
-                //game removes door from list
-                //player chooses door - either the same door or swapping door
-                //compare if the Door player has, has prize or not
-                //Did player win
     }
 }

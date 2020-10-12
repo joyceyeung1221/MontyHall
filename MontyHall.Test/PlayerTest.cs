@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Moq;
 using Xunit;
 namespace MontyHall.Test
 {
@@ -21,7 +22,7 @@ namespace MontyHall.Test
         public void ShouldHaveADoor_WhenPlayerChooseADoor()
         {
             var player = new Player();
-            player.ChooseDoor(doors);
+            player.ChooseDoor(doors, new Randomiser());
             Assert.IsType<Door>(player.ChosenDoor);
         }
 
@@ -29,7 +30,7 @@ namespace MontyHall.Test
         public void ShouldHaveTheSameDoor_WhenPlayerChooseNotToSwitch()
         {
             var player = new Player();
-            player.ChooseDoor(doors);
+            player.ChooseDoor(doors,new Randomiser());
             var firstDoor = player.ChosenDoor;
             player.DecideNextMove(doors);
             var secondDoor = player.ChosenDoor;
@@ -43,13 +44,16 @@ namespace MontyHall.Test
         public void ShouldHaveDifferentDoor_WhenPlayerChooseToSwitch()
         {
             var player = new Player(switching: true);
-            player.ChooseDoor(doors);
+            var mockRandomiser = new Mock<IRandom>();
+
+            mockRandomiser.Setup(x => x.GenerateRandomNumber(It.IsAny<int>())).Returns(0);
+            player.ChooseDoor(doors,mockRandomiser.Object);
+
             var firstDoor = player.ChosenDoor;
             player.DecideNextMove(doors);
             var secondDoor = player.ChosenDoor;
 
             Assert.False(firstDoor == secondDoor);
-
 
         }
     }
