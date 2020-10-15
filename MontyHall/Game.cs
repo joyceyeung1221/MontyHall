@@ -59,7 +59,6 @@ namespace MontyHall
                 AvailableDoors.Remove(hostDoor);
                 _player.DecideNextMove(AvailableDoors);
                 return DidPlayerWin();
-                // TODO: Need to start simulation and account for non-switching scenario
         }
 
 
