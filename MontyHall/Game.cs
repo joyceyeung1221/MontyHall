@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MontyHall
 {
-    public class Game
+    public class Game : IGame
     {
         private Player _player;
         private Host _monty;
