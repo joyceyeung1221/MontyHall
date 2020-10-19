@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MontyHall
 {
-    public class Game
+    public class Game : IGame
     {
         private Player _player;
         private Host _monty;
@@ -59,7 +59,6 @@ namespace MontyHall
                 AvailableDoors.Remove(hostDoor);
                 _player.DecideNextMove(AvailableDoors);
                 return DidPlayerWin();
-                // TODO: Need to start simulation and account for non-switching scenario
         }
 
 
