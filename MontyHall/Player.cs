@@ -6,13 +6,18 @@ namespace MontyHall
 {
     public class Player
     {
-        private bool _switching;
+        private PlayerStrategy _switching;
 
         
         public Door ChosenDoor { get; set; }
-        public Player( bool switching = false)
+        public Player( PlayerStrategy strat)
         {
-            _switching = switching;
+            _switching = strat;
+        }
+
+        public Player()
+        {
+            _switching = PlayerStrategy.Non_Switching;
         }
 
         public Door ChooseDoor(List<Door> doors, IRandom randomiser)
@@ -25,7 +30,7 @@ namespace MontyHall
         public void DecideNextMove(List<Door> doors)
         {
             
-            if(_switching)
+            if(_switching == PlayerStrategy.Switching)
             {
                 ChosenDoor = doors.Last();
             }

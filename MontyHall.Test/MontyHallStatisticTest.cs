@@ -1,10 +1,14 @@
 ﻿using System;
+using Xunit;
 namespace MontyHall.Test
 {
     public class MontyHallStatisticTest
     {
-        public MontyHallStatisticTest()
+        [Fact]
+        public void EndToEndTest()
         {
+
+            
         }
     }
 }

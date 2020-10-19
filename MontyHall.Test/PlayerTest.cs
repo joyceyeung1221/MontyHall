@@ -43,7 +43,7 @@ namespace MontyHall.Test
         [Fact]
         public void ShouldHaveDifferentDoor_WhenPlayerChooseToSwitch()
         {
-            var player = new Player(switching: true);
+            var player = new Player(PlayerStrategy.Switching);
             var mockRandomiser = new Mock<IRandom>();
 
             mockRandomiser.Setup(x => x.GenerateRandomNumber(It.IsAny<int>())).Returns(0);
