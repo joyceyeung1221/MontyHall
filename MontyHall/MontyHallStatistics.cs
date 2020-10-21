@@ -19,13 +19,6 @@ namespace MontyHall
       //  }
         
 
-        //calculate A/ total number or games *100 -> A%
-        //calculate B/ total number or games *100 -> B%
-
-        //Print out A% & B%
-//TODO: Create and Test a Calculator class
-//TODO: Create and Test a Presentor class to build final string
-//TODO: Create a ui to actually print the final string
 
     }
 }
