@@ -6,7 +6,10 @@ namespace MontyHall
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var output = new Output();
+            var presenter = new Presenter(output);
+            var montyHall = new MontyHallStatistics(presenter);
+            montyHall.Run();
         }
     }
 }
