@@ -36,8 +36,6 @@ namespace MontyHall.Test
             var secondDoor = player.ChosenDoor;
 
             Assert.Same(firstDoor, secondDoor);
-
-
         }
 
         [Fact]

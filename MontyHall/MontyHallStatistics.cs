@@ -18,7 +18,7 @@ namespace MontyHall
         //  }
 
         private Presenter _presenter;
-        private const int NumberOfRuns = 15;
+        private const int NumberOfRuns = 1000;
         private const int NumberOfDoors = 3;
 
         public MontyHallStatistics(Presenter presenter)

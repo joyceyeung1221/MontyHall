@@ -23,7 +23,6 @@ namespace MontyHall
         public Door ChooseDoor(List<Door> doors, IRandom randomiser)
         {
             var randomNumber = randomiser.GenerateRandomNumber(doors.Count);
-            System.Console.WriteLine(randomNumber);
             ChosenDoor = doors[randomNumber];
             return ChosenDoor;
         }

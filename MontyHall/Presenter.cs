@@ -12,8 +12,8 @@ namespace MontyHall
 
         public void DisplayResult(Result strategyOne, Result strategyTwo)
         {
-            var text = $"For strategy: {strategyOne.Strategy}, the winning percentage is {strategyOne.WinningPercentage * 100}%./n" +
-                       $"For strategy: {strategyTwo.Strategy}, the winning percentage is {strategyTwo.WinningPercentage * 100}%.";
+            var text = $"For strategy: {strategyOne.Strategy}, the winning percentage is {strategyOne.WinningPercentage * 100}\n" +
+                       $"For strategy: {strategyTwo.Strategy}, the winning percentage is {strategyTwo.WinningPercentage * 100}";
 
             _output.Write(text);
         }

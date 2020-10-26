@@ -10,22 +10,15 @@ namespace MontyHall.Test
         int numberOfDoors = 3;
         Player player = new Player();
 
-        [Fact]
-        public void ShouldRepresentDoorsAsAList()
-        {
-            var rand = new Randomiser();
-            var game = new Game(rand, 3, player);
-            Assert.IsType<List<Door>>(game.AvailableDoors);
-        }
-
-        [Fact]
-        public void ShouldSetPrizeForOneDoor()
-        {
-            var mockRandomiser = new Mock<IRandom>(); 
-            mockRandomiser.Setup(x => x.GenerateRandomNumber(3)).Returns(0);
-            var game = new Game(mockRandomiser.Object, numberOfDoors, player);
-            Assert.True(game.AvailableDoors[0].HasPrize);
-        }
+        // [Fact]
+        // public void ShouldSetPrizeForOneDoor()
+        // {
+        //     var mockRandomiser = new Mock<IRandom>(); 
+        //     mockRandomiser.Setup(x => x.GenerateRandomNumber(3)).Returns(0);
+        //     var game = new Game(mockRandomiser.Object, numberOfDoors, player);
+        //     Assert.True(game.AvailableDoors[0].HasPrize);
+        //     Assert.False(game.AvailableDoors[1].HasPrize);
+        // }
 
         [Fact]
         public void ShouldReturnTrueWhenPlayerHasDoorWithPrize()

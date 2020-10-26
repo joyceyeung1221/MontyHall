@@ -7,6 +7,7 @@ namespace MontyHall
     {
         private Player _player;
         private Host _monty;
+        private int _numberOfDoors;
         public List<Door> AvailableDoors { get; private set;}
         private IRandom _randomiser;
 
@@ -14,7 +15,7 @@ namespace MontyHall
         public Game(IRandom randomiser, int num, Player player)
         {
             _randomiser = randomiser;
-            AvailableDoors = DoorSetup(num);
+            _numberOfDoors = num;
             _player = player;
             _monty = new Host();
         }
@@ -53,12 +54,13 @@ namespace MontyHall
 
         public bool Run()
         {
-                var door = _player.ChooseDoor(AvailableDoors, _randomiser);
-                AvailableDoors.Remove(door);
-                var hostDoor = _monty.ChooseDoor(AvailableDoors);
-                AvailableDoors.Remove(hostDoor);
-                _player.DecideNextMove(AvailableDoors);
-                return DidPlayerWin();
+            AvailableDoors = DoorSetup(_numberOfDoors); // Moved
+            var door = _player.ChooseDoor(AvailableDoors, _randomiser);
+            AvailableDoors.Remove(door);
+            var hostDoor = _monty.ChooseDoor(AvailableDoors);
+            AvailableDoors.Remove(hostDoor);
+            _player.DecideNextMove(AvailableDoors);
+            return DidPlayerWin();
         }
 
 
