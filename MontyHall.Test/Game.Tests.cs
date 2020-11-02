@@ -10,15 +10,18 @@ namespace MontyHall.Test
         int numberOfDoors = 3;
         Player player = new Player();
 
-        // [Fact]
-        // public void ShouldSetPrizeForOneDoor()
-        // {
-        //     var mockRandomiser = new Mock<IRandom>(); 
-        //     mockRandomiser.Setup(x => x.GenerateRandomNumber(3)).Returns(0);
-        //     var game = new Game(mockRandomiser.Object, numberOfDoors, player);
-        //     Assert.True(game.AvailableDoors[0].HasPrize);
-        //     Assert.False(game.AvailableDoors[1].HasPrize);
-        // }
+        [Fact]
+        public void ShouldSetPrizeForOneDoor()
+        {
+            var mockRandomiser = new Mock<IRandom>(); 
+            mockRandomiser.Setup(x => x.GenerateRandomNumber(3)).Returns(2);
+            var game = new Game(mockRandomiser.Object, numberOfDoors, player);
+            game.Run();
+            Assert.True(game.AvailableDoors[0].HasPrize);
+            // Assert.False(game.AvailableDoors[1].HasPrize);
+            // TODO: extract out a Doors Collection class to handle doors construction.
+            // TODO: Go through the GitHub questions.
+        }
 
         [Fact]
         public void ShouldReturnTrueWhenPlayerHasDoorWithPrize()

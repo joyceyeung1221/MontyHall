@@ -18,39 +18,36 @@ namespace MontyHall
         //  }
 
         private Presenter _presenter;
+        private Calculator _calculator;
+        private Randomiser _randomiser;
+        private Player _player1;
+        private Player _player2;
         private const int NumberOfRuns = 1000;
         private const int NumberOfDoors = 3;
 
-        public MontyHallStatistics(Presenter presenter)
+        public MontyHallStatistics(Presenter presenter, Player player1, Player player2)
         {
             _presenter = presenter;
+            _calculator = new Calculator();
+            _randomiser = new Randomiser();
+            _player1 = player1;
+            _player2 = player2;
         }
 
         public void Run()
         {
-            var calculator = new Calculator();
-
-            var randomiser = new Randomiser();
-            var playerSwitchStrat = PlayerStrategy.Non_Switching;
-            var playerNonSwitchStrat = PlayerStrategy.Switching;
-            var playerNonSwitching = new Player(playerSwitchStrat);
-            var playerSwitching = new Player(playerNonSwitchStrat);
-
-            var game1 = new Game(randomiser, NumberOfDoors, playerNonSwitching);
-            var game2 = new Game(randomiser, NumberOfDoors, playerSwitching);
-
-            var simulator1 = new Simulator(game1, NumberOfRuns);
-            var simulator2 = new Simulator(game2, NumberOfRuns);
-
-            var numberOfWins1 = simulator1.Run();
-            var numberOfWins2 = simulator2.Run();
-
-            var result1 = calculator.CalculateResult(playerSwitchStrat, numberOfWins1, NumberOfRuns);
-            var result2 = calculator.CalculateResult(playerNonSwitchStrat, numberOfWins2, NumberOfRuns);
-
+            var result1 = CreateResult(_player1);
+            var result2 = CreateResult(_player2);
             _presenter.DisplayResult(result1, result2);
         }
 
+        private Result CreateResult(Player player)
+        {
+            var game = new Game(_randomiser, NumberOfDoors, player);
+            var simulator = new Simulator(game, NumberOfRuns);
+            var numberOfWins = simulator.Run();
+            return _calculator.CalculateResult(player.Strategy, numberOfWins, NumberOfRuns);
+        }
 
     }
 }

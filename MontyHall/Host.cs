@@ -10,11 +10,9 @@ namespace MontyHall
         {
             foreach(Door d in doors)
             {
-                if(!d.HasPrize) //TODO: Would be nice to have Monty pick a 'random' losing door
+                if(!d.HasPrize) 
                 {
-                    //pick a door
                     chosenDoor = d;
-                    
                 }
             }
             return chosenDoor;

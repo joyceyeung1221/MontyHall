@@ -25,7 +25,6 @@ namespace MontyHall
         private int AddWinningGame()
         {
             return _game.Run() ? 1 : 0;
-            
         }
     }
 }

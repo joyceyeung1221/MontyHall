@@ -6,10 +6,6 @@ namespace MontyHall.Test
 {
     public class PlayerTest
     {
-        public PlayerTest()
-        {
-        }
-
         List<Door> doors = new List<Door>
         {
             new Door(),

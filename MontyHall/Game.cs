@@ -54,7 +54,7 @@ namespace MontyHall
 
         public bool Run()
         {
-            AvailableDoors = DoorSetup(_numberOfDoors); // Moved
+            AvailableDoors = DoorSetup(_numberOfDoors);
             var door = _player.ChooseDoor(AvailableDoors, _randomiser);
             AvailableDoors.Remove(door);
             var hostDoor = _monty.ChooseDoor(AvailableDoors);

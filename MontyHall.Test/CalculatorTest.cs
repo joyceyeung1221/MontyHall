@@ -4,10 +4,6 @@ namespace MontyHall.Test
 {
     public class CalculatorTest
     {
-        public CalculatorTest()
-        {
-        }
-
         [Fact]
         public void ShouldReturnAResult()
         {

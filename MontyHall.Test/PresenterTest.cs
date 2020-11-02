@@ -5,10 +5,6 @@ namespace MontyHall.Test
 {
     public class PresenterTest
     {
-        public PresenterTest()
-        {
-        }
-
         [Fact]
         public void ShouldPrintOutStatisticResultString()
         {
@@ -18,7 +14,7 @@ namespace MontyHall.Test
             var resultNonSwitching = new Result(PlayerStrategy.Non_Switching, (double)0.34);
             presenter.DisplayResult(resultSwitching, resultNonSwitching);
 
-            mockOutput.Verify(x => x.Write("For strategy: Switching, the winning percentage is 66%./nFor strategy: Non_Switching, the winning percentage is 34%."), Times.Exactly(1));
+            mockOutput.Verify(x => x.Write("For strategy: Switching, the winning percentage is 66%.\nFor strategy: Non_Switching, the winning percentage is 34%."), Times.Exactly(1));
         }
     }
 }
