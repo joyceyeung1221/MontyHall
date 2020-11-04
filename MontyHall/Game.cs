@@ -8,7 +8,7 @@ namespace MontyHall
         private Player _player;
         private Host _monty;
         private int _numberOfDoors;
-        public List<Door> AvailableDoors { get; private set;}
+        public DoorsCollection AvailableDoors { get; private set;} 
         private IRandom _randomiser;
 
 
@@ -21,32 +21,6 @@ namespace MontyHall
         }
 
 
-        private List<Door> DoorSetup( int doorQuantity)
-        {
-            var doors = CreateDoors(doorQuantity);
-            AssignDoorAPrize(doors);
-            return doors;
-        }
-
-        private List<Door> CreateDoors(int doorQuantity)
-        {
-            List<Door> doors = new List<Door>();
-            for (int i = 0; i < doorQuantity; i++)
-            {
-                doors.Add(new Door());
-            }
-            return doors;
-        }
-
-        private List<Door> AssignDoorAPrize(List<Door> doors)
-        {
-
-            var door = doors[_randomiser.GenerateRandomNumber(doors.Count)];
-            door.HasPrize = true;
-            return doors;
-
-        }
-
         private bool DidPlayerWin()
         {
             return _player.ChosenDoor.HasPrize;
@@ -54,12 +28,13 @@ namespace MontyHall
 
         public bool Run()
         {
-            AvailableDoors = DoorSetup(_numberOfDoors);
-            var door = _player.ChooseDoor(AvailableDoors, _randomiser);
-            AvailableDoors.Remove(door);
-            var hostDoor = _monty.ChooseDoor(AvailableDoors);
-            AvailableDoors.Remove(hostDoor);
-            _player.DecideNextMove(AvailableDoors);
+            AvailableDoors = new DoorsCollection(_numberOfDoors);
+            AvailableDoors.AssignDoorAPrize(_randomiser);
+            var door = _player.ChooseDoor(AvailableDoors.GetListOfDoors(), _randomiser);
+            AvailableDoors.RemoveDoor(door);
+            var hostDoor = _monty.ChooseDoor(AvailableDoors.GetListOfDoors());
+            AvailableDoors.RemoveDoor(hostDoor);
+            _player.DecideNextMove(AvailableDoors.GetListOfDoors());
             return DidPlayerWin();
         }
 
